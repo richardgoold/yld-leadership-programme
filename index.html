@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YLD Leadership Programme</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #090329;
+  --navy-mid: #120840;
+  --navy-light: #1e1060;
+  --purple: #2d0693;
+  --purple-light: #9a3cf5;
+  --purple-glow: rgba(154, 60, 245, 0.12);
+  --mint: #6feea1;
+  --mint-light: #92fbd0;
+  --mint-glow: rgba(111, 238, 161, 0.1);
+  --red: #e7333c;
+  --gold: #C4A265;
+  --mint-dark: #158158;
+  --white: #ffffff;
+  --off-white: #f8f8fa;
+  --light-grey: #f0f0f4;
+  --text-primary: #1a1a1f;
+  --text-secondary: #55555e;
+  --text-light: #88889a;
+  --text-on-dark: #e8e6f0;
+  --text-on-dark-muted: #9a98a8;
+  --border-light: rgba(0,0,0,0.06);
+  --shadow-sm: 0 1px 3px rgba(9,3,41,0.04);
+  --shadow-md: 0 4px 20px rgba(9,3,41,0.07);
+  --shadow-lg: 0 12px 40px rgba(9,3,41,0.12);
+  --font-body: 'Roboto', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--purple); color: white; }
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.88);
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.4s var(--ease-out);
+}
+.nav.scrolled { box-shadow: var(--shadow-sm); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0.65rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { height: 28px; }
+.nav-links { display: flex; gap: 0.2rem; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500; color: var(--text-secondary);
+  text-decoration: none; padding: 0.4rem 0.7rem; border-radius: 6px;
+  transition: all 0.2s; letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--purple); background: var(--purple-glow); }
+.nav-links a.active { color: var(--purple); background: var(--purple-glow); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--navy); position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 85%, rgba(45, 6, 147, 0.25), transparent),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(111, 238, 161, 0.08), transparent);
+}
+.hero-pattern {
+  position: absolute; inset: 0; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60Z' fill='none' stroke='white' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 780px; padding: 2rem;
+}
+.hero-logo {
+  width: 80px; height: auto; margin: 0 auto 2.5rem; display: block;
+  
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.1s both;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--mint); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 2rem; padding: 0.45rem 1rem; border-radius: 100px;
+  background: rgba(111, 238, 161, 0.08); border: 1px solid rgba(111, 238, 161, 0.15);
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.2s both;
+}
+.hero-tag .dot { width: 6px; height: 6px; background: var(--mint); border-radius: 50%; animation: pulse 2s ease infinite; }
+.hero h1 {
+  font-weight: 700; font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: var(--white); line-height: 1.15; letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.35s both;
+}
+.hero h1 em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(135deg, var(--mint), var(--purple-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 1.1rem; font-weight: 300; color: var(--text-on-dark-muted);
+  max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.75;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.5s both;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-body); font-weight: 500; font-size: 0.88rem;
+  color: var(--navy); background: var(--mint);
+  padding: 0.8rem 1.8rem; border-radius: 100px; text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.65s both;
+}
+.hero-cta:hover { background: var(--mint-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(111, 238, 161, 0.25); }
+.hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.hero-cta:hover svg { transform: translateY(2px); }
+
+/* ─── SECTIONS ─── */
+.section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-dark {
+  background: var(--navy); color: var(--text-on-dark);
+  max-width: 100%; padding: 6rem 2rem;
+}
+.section-dark .section-inner { max-width: 1200px; margin: 0 auto; }
+.section-alt { background: var(--off-white); max-width: 100%; padding: 6rem 2rem; }
+.section-alt .section-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
+  color: var(--purple); letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.section-dark .section-label { color: var(--mint); }
+.section-title {
+  font-weight: 700; font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 1.25rem;
+}
+.section-dark .section-title { color: var(--white); }
+.section-lead {
+  font-size: 1.05rem; font-weight: 300; color: var(--text-secondary);
+  max-width: 620px; line-height: 1.75; margin-bottom: 2.5rem;
+}
+.section-dark .section-lead { color: var(--text-on-dark-muted); }
+
+/* ─── CONTEXT CARDS ─── */
+.context-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem; margin-top: 1.5rem;
+}
+.context-card {
+  background: white; border-radius: 12px; padding: 1.75rem;
+  border: 1px solid var(--border-light);
+  transition: all 0.4s var(--ease-out); position: relative; overflow: hidden;
+}
+.context-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--mint));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease-out);
+}
+.context-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.context-card:hover::after { transform: scaleX(1); }
+.context-card .card-num {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--purple); background: var(--purple-glow);
+  padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.75rem;
+}
+.context-card h3 { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--navy); }
+.context-card p { font-size: 0.9rem; font-weight: 300; color: var(--text-secondary); line-height: 1.65; }
+
+/* ─── QUOTE ─── */
+.quote-block { position: relative; padding: 2.5rem 0; margin: 2.5rem 0; }
+.quote-block::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--purple), var(--mint));
+}
+.quote-block blockquote {
+  font-weight: 300; font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.65;
+  color: var(--navy); padding-left: 2rem; max-width: 680px;
+}
+.section-dark .quote-block blockquote { color: var(--white); }
+
+/* ─── METRICS ─── */
+.metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 3rem 0; }
+.metric-box { text-align: center; }
+.metric-value {
+  font-weight: 700; font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--mint); line-height: 1.1;
+}
+.metric-label {
+  font-size: 0.75rem; font-weight: 400; color: var(--text-on-dark-muted);
+  margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* ─── THEMES ─── */
+.theme-module {
+  background: white; border-radius: 12px; margin-bottom: 0.75rem;
+  border: 1px solid var(--border-light); overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+}
+.theme-module.active { box-shadow: var(--shadow-md); border-color: rgba(45, 6, 147, 0.1); }
+.theme-header {
+  padding: 1.25rem 1.75rem; cursor: pointer;
+  display: flex; align-items: center; gap: 1rem;
+  transition: background 0.2s; user-select: none;
+}
+.theme-header:hover { background: rgba(0,0,0,0.008); }
+.theme-num {
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
+  color: var(--purple); background: var(--purple-glow);
+  padding: 0.3rem 0.55rem; border-radius: 5px; min-width: 2.2rem; text-align: center;
+}
+.theme-title-group { flex: 1; }
+.theme-title { font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+.theme-subtitle { font-size: 0.8rem; font-weight: 300; color: var(--text-light); margin-top: 0.1rem; }
+.theme-toggle {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--off-white); transition: all 0.3s; flex-shrink: 0;
+}
+.theme-module.active .theme-toggle { background: var(--purple); }
+.theme-toggle svg { width: 13px; height: 13px; color: var(--text-light); transition: all 0.3s var(--ease-out); }
+.theme-module.active .theme-toggle svg { color: white; transform: rotate(180deg); }
+.theme-body { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-out); }
+.theme-module.active .theme-body { max-height: 2000px; }
+.theme-content { padding: 0 1.75rem 1.75rem; border-top: 1px solid var(--border-light); }
+.theme-content h4 { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin: 1.25rem 0 0.6rem; }
+.theme-content h4:first-child { margin-top: 1.25rem; }
+.theme-content p { font-size: 0.9rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.7; }
+.theme-content ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+.theme-content li { font-size: 0.9rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 0.4rem; line-height: 1.6; }
+.theme-content li strong { color: var(--text-primary); font-weight: 500; }
+
+.theme-exercise {
+  background: var(--off-white); border-radius: 10px; padding: 1.25rem;
+  margin: 1rem 0; border-left: 3px solid var(--mint);
+}
+.theme-exercise .ex-label {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--mint); filter: brightness(0.7);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.theme-exercise h5 { font-weight: 700; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.4rem; }
+.theme-exercise p { font-size: 0.85rem; font-weight: 300; color: var(--text-secondary); margin: 0; }
+.theme-takeaway {
+  background: var(--navy); border-radius: 10px; padding: 1.25rem; margin: 1rem 0;
+}
+.theme-takeaway p { font-weight: 300; font-style: italic; color: var(--white); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
+/* ─── SIMULATOR ─── */
+.simulator {
+  background: white; border-radius: 16px; padding: 2.5rem;
+  border: 1px solid var(--border-light); box-shadow: var(--shadow-md); margin: 1.5rem 0;
+}
+.simulator h3 { font-weight: 700; font-size: 1.2rem; color: var(--navy); margin-bottom: 0.4rem; }
+.simulator .sim-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 1.75rem; }
+.sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+.sim-controls { display: flex; flex-direction: column; gap: 1.25rem; }
+.sim-control label {
+  display: block; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);
+  letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 0.4rem;
+}
+.sim-control .val { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; color: var(--navy); float: right; }
+.sim-control input[type="range"] {
+  width: 100%; height: 5px; -webkit-appearance: none; appearance: none;
+  background: var(--light-grey); border-radius: 3px; outline: none;
+}
+.sim-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--purple); cursor: pointer;
+  box-shadow: 0 2px 8px rgba(45, 6, 147, 0.25); transition: transform 0.2s;
+}
+.sim-control input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.sim-output {
+  background: var(--navy); border-radius: 12px; padding: 1.75rem; color: var(--white);
+}
+.sim-output h4 {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--mint); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem;
+}
+.sim-metric { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.sim-metric:last-child { border: none; }
+.sim-metric-label { font-size: 0.85rem; font-weight: 300; color: var(--text-on-dark-muted); }
+.sim-metric-value { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; }
+.sim-metric-value.pos { color: var(--mint); }
+.sim-metric-value.neg { color: var(--red); }
+.sim-metric-value.big { font-size: 1.35rem; color: var(--mint); }
+.sim-div { height: 1px; background: rgba(255,255,255,0.08); margin: 0.3rem 0; }
+
+/* ─── AI CARDS ─── */
+.ai-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+.ai-card {
+  background: rgba(255,255,255,0.03); border-radius: 12px; padding: 1.75rem;
+  border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s var(--ease-out);
+}
+.ai-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-3px); border-color: rgba(111, 238, 161, 0.2); }
+.ai-card .ai-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-size: 1.3rem;
+}
+.ai-card:nth-child(1) .ai-icon { background: rgba(111, 238, 161, 0.12); }
+.ai-card:nth-child(2) .ai-icon { background: rgba(154, 60, 245, 0.15); }
+.ai-card:nth-child(3) .ai-icon { background: rgba(111, 238, 161, 0.12); }
+.ai-card h3 { font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 0.6rem; }
+.ai-card p { font-size: 0.85rem; font-weight: 300; color: var(--text-on-dark-muted); line-height: 1.65; }
+
+/* ─── PROMPT ─── */
+.prompt-demo {
+  background: #0a0220; border-radius: 12px; padding: 1.75rem;
+  margin: 2rem 0; border: 1px solid rgba(255,255,255,0.06);
+}
+.prompt-bar { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 1.25rem; }
+.prompt-bar .d1 { width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; }
+.prompt-bar .d2 { width: 9px; height: 9px; border-radius: 50%; background: #febc2e; }
+.prompt-bar .d3 { width: 9px; height: 9px; border-radius: 50%; background: #28c840; }
+.prompt-bar span { font-family: var(--font-mono); font-size: 0.68rem; color: #6a6880; margin-left: 0.6rem; }
+.prompt-content { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.8; }
+.prompt-content .pl { color: var(--mint); }
+.prompt-content .pt { color: #c9c7d9; }
+.prompt-content .pr { color: #6a6880; font-style: italic; }
+.prompt-content .cursor { display: inline-block; width: 7px; height: 15px; background: var(--mint); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+
+/* ─── FRONT DOOR ─── */
+.fd-flow { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+.fd-step {
+  background: white; border-radius: 10px; padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border-light);
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: all 0.3s var(--ease-out);
+}
+.fd-step:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+.fd-num {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+  color: var(--purple); background: var(--purple-glow);
+  padding: 0.25rem 0.5rem; border-radius: 4px; flex-shrink: 0;
+}
+.fd-step h4 { font-weight: 700; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.2rem; }
+.fd-step p { font-size: 0.83rem; font-weight: 300; color: var(--text-secondary); margin: 0; }
+.fd-output {
+  background: var(--navy); border-radius: 12px; padding: 2rem; max-width: 560px; margin-top: 2rem;
+}
+.fd-output .fd-label {
+  font-family: var(--font-mono); font-size: 0.65rem; color: var(--mint);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.fd-output p { font-size: 1.05rem; font-weight: 500; color: var(--white); line-height: 1.6; margin-bottom: 0.5rem; }
+
+/* ─── AGENDA ─── */
+.agenda-day { margin-bottom: 2.5rem; }
+.agenda-day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+.agenda-day-num { font-weight: 700; font-size: 2.2rem; color: var(--purple); opacity: 0.2; line-height: 1; }
+.agenda-day-title { font-weight: 700; font-size: 1.2rem; color: var(--navy); }
+.agenda-day-sub { font-size: 0.82rem; font-weight: 300; color: var(--text-light); }
+.agenda-items { display: flex; flex-direction: column; gap: 0.35rem; }
+.agenda-item {
+  display: grid; grid-template-columns: 90px 1fr auto; gap: 0.75rem; align-items: center;
+  padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.88rem; transition: background 0.2s;
+}
+.agenda-item:hover { background: white; }
+.agenda-time { font-family: var(--font-mono); font-size: 0.75rem; color: var(--purple); font-weight: 500; }
+.agenda-topic { font-weight: 500; color: var(--text-primary); }
+.agenda-fmt { font-size: 0.75rem; font-weight: 400; color: var(--text-light); background: var(--light-grey); padding: 0.2rem 0.5rem; border-radius: 3px; }
+.agenda-break { opacity: 0.45; }
+.agenda-break .agenda-topic { font-weight: 300; font-style: italic; }
+
+/* ─── CLOSE ─── */
+.closing-text {
+  font-weight: 300; font-style: italic; font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--white); line-height: 1.7; max-width: 560px; margin: 2rem auto;
+}
+
+/* ─── FOOTER ─── */
+.footer { background: var(--navy); padding: 2.5rem 2rem; text-align: center; }
+.footer p { font-size: 0.78rem; font-weight: 300; color: var(--text-on-dark-muted); }
+.footer img { height: 24px;  opacity: 0.4; margin-bottom: 0.75rem; }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .sim-grid { grid-template-columns: 1fr; }
+  .ai-cards { grid-template-columns: 1fr; }
+  .metrics-row { grid-template-columns: repeat(2, 1fr); }
+  .context-grid { grid-template-columns: 1fr; }
+  .agenda-item { grid-template-columns: 70px 1fr; }
+  .agenda-fmt { display: none; }
+  .section, .section-dark, .section-alt { padding: 4rem 1.5rem; }
+}
+
+/* View mode toggle */
+.view-toggle { display:flex; align-items:center; gap:0.4rem; margin-left:auto; cursor:pointer; user-select:none; }
+.view-toggle-track { width:36px; height:20px; background:var(--purple); border-radius:10px; position:relative; transition:background 0.2s; }
+.view-toggle-thumb { width:16px; height:16px; background:white; border-radius:50%; position:absolute; top:2px; left:2px; transition:left 0.2s; }
+.view-toggle-track.session .view-toggle-thumb { left:18px; }
+.view-toggle-track.session { background:var(--mint-dark); }
+.view-toggle-label { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); }
+
+/* Session mode: hide facilitator elements */
+body.session-mode .facilitator-only { display:none !important; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <img class="nav-logo" src="data:image/png;base64,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" alt="YLD">
+    <div class="nav-links">
+      <div class="view-toggle" onclick="toggleView()" title="Switch between Facilitator and Session view">
+        <span class="view-toggle-label" id="view-label">Facilitator</span>
+        <div class="view-toggle-track" id="view-track"><div class="view-toggle-thumb"></div></div>
+      </div>
+      <a href="#context">Context</a>
+      <a href="#themes">Themes</a>
+      <a href="#simulator">Simulator</a>
+      <a href="#ai">AI</a>
+      <a href="#frontdoor">Front Door</a>
+      <a href="#agenda">Agenda</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <img class="hero-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArAAAAKwCAYAAABgREy2AAAY70lEQVR4nO3d227kWnJF0dRB/f8vqx+qVSWVUlJeyNixYo8BGDAM2J3iJTgZTZ9+eX19vQAAQIr/Vv8AAAC4h4AFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIMqv1T8AoNDr6h8Q7mX1D4Ag5s3jfpw1NrAA3Or14qEMt3CfnEzAArvwQAEYQsACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQ5dfqHwDvvH7xP38p/RUAQGsClkpfBeqz/3sCFwA2ImA506PBesS/jqgFgKEELEeritafvP0OIQsAwwhYjtAlWq95/9vELAAMIGB5VOdo/YqYBYABBCz3SgzXa8QsAIQSsNxqSrhe43tZAAjiP8iAn7xeZsfre7v8nQAQzQaWr+wac7axANCcDSzX7Bqv7+20eQaAKAKW90TbZ44HADQjYHkj1L7m2ABAIwKWy0Wg3cJ2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" alt="YLD">
+    <div class="hero-tag"><span class="dot"></span> Leadership Programme 2026</div>
+    <h1>Building the Team<br>That <em>Builds the Business</em></h1>
+    <p class="hero-sub">A hands-on programme to develop commercial fluency, leadership capability, and the shared operating discipline that will carry YLD through its next chapter.</p>
+    <a href="#context" class="hero-cta">Begin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+  </div>
+</section>
+
+<section class="section" id="context">
+  <div class="reveal">
+    <div class="section-label">01 &mdash; The Context</div>
+    <h2 class="section-title">Why This Matters Now</h2>
+    <p class="section-lead">YLD is at an inflexion point. The business has grown significantly and the ambition is to build something exceptional &mdash; a great business that creates lasting value for its people, its clients, and its future. That ambition demands a leadership team that thinks commercially, acts with ownership, and operates as one team.</p>
+  </div>
+  <div class="context-grid">
+    <div class="context-card reveal reveal-d1"><span class="card-num">01</span><h3>A Reset Year</h3><p>2026 is the year to set foundations. Not doing everything at once, but being clear about what matters most and sequencing work with discipline.</p></div>
+    <div class="context-card reveal reveal-d2"><span class="card-num">02</span><h3>Shared Responsibility</h3><p>High-performing teams don&rsquo;t quietly carry their own load. They share the heavy lifting, step in early, and ask for support as an act of strength.</p></div>
+    <div class="context-card reveal reveal-d3"><span class="card-num">03</span><h3>Everyone Contributes to Growth</h3><p>Sales is not a dirty word. Everyone who delivers for a client, manages a relationship, or shapes how the business runs is contributing to YLD&rsquo;s growth.</p></div>
+  </div>
+  <div class="quote-block reveal">
+    <blockquote>We can all, and must, be successful together. It would be a poor outcome if we found ourselves behind or below our potential simply because we did not use the strength of the team around the table.</blockquote>
+  </div>
+</section>
+
+<section class="section-dark" id="numbers">
+  <div class="section-inner">
+    <div class="reveal"><div class="section-label">The Foundation</div><h2 class="section-title">YLD by the Numbers</h2></div>
+    <div class="metrics-row reveal">
+      <div class="metric-box"><div class="metric-value" data-target="86" data-suffix="%">0%</div><div class="metric-label">Engineer Utilisation<br>(vs 76% industry avg)</div></div>
+      <div class="metric-box"><div class="metric-value" data-target="30" data-suffix=" mo">0 mo</div><div class="metric-label">Avg Top 5 Client<br>Contract Length</div></div>
+      <div class="metric-box"><div class="metric-value" data-target="139" data-suffix="%" data-prefix="+">0%</div><div class="metric-label">Growth in Monthly<br>Revenue Per Client</div></div>
+      <div class="metric-box"><div class="metric-value" data-target="9000" data-suffix="+" data-sep="1">0</div><div class="metric-label">Open-Source<br>Contributions</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="themes">
+  <div class="reveal"><div class="section-label">02 &mdash; The Programme</div><h2 class="section-title">Seven Themes</h2><p class="section-lead">Each theme addresses a specific leadership capability, grounded in YLD&rsquo;s reality. They build on each other, from commercial foundations to operating as one team.</p></div>
+
+  <div class="reveal facilitator-only" style="background:var(--off-white);border-radius:12px;padding:1.75rem;margin-bottom:2rem;border:1px solid var(--border-light);">
+    <h3 style="font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:0.75rem;">How Each Session Works</h3>
+    <p style="font-size:0.9rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.5rem;">Every theme follows the same structure to build understanding, create hands-on experience, and commit to action:</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1rem;">
+      <div style="text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Frame</div><p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);margin:0;">Context-setting and teaching. Why this matters for YLD right now.</p></div>
+      <div style="text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Apply</div><p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);margin:0;">Hands-on exercise using real YLD scenarios. Groups work, debate, and present.</p></div>
+      <div style="text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Reflect</div><p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);margin:0;">Facilitated debrief. What surprised you? What would you do differently?</p></div>
+      <div style="text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Commit</div><p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);margin:0;">Each person leaves with one specific action to take in the next 2 weeks.</p></div>
+    </div>
+  </div>
+
+  <div class="reveal">
+
+    <div class="theme-module" data-theme="1"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">01</span><div class="theme-title-group"><div class="theme-title">Finance 101</div><div class="theme-subtitle">How money flows through a consulting business</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Every leader can read a P&amp;L, understand how their decisions affect margin and cash, and ask the right financial questions with confidence.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Finance is the CFO&rsquo;s job. I focus on delivery.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Every decision I make has a P&amp;L consequence &mdash; and I can see it.&rdquo;</p>
+  </div>
+</div>
+
+<!-- SESSION STORYBOARD -->
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <!-- BLOCK 1: PROVOCATION -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Open cold with a scenario, not a slide. Read this to the room:</p>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;It&rsquo;s Monday morning. Your biggest client has just paused their project &mdash; effective immediately. That&rsquo;s &pound;180k of revenue gone from this quarter. You have three contractors on that engagement who are now unbillable. Your utilisation just dropped from 86% to 71%. Meanwhile, a new prospect wants to start in two weeks but you&rsquo;d need to hire two senior engineers to staff it &mdash; and the deal hasn&rsquo;t signed yet. What do you do?&rdquo;</p>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Don&rsquo;t answer it. Don&rsquo;t discuss it yet. Just let it sit. Say: <em>&ldquo;By the end of this session, you&rsquo;ll be able to work through that scenario fluently. Right now, most of you can&rsquo;t &mdash; and that&rsquo;s exactly why we&rsquo;re here.&rdquo;</em></p>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: This will create discomfort. That&rsquo;s the point. Resist the urge to reassure. The discomfort is the motivation for the next 90 minutes.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 2: FRAME -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">30 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: How Money Flows Through YLD</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Walk through the consulting P&amp;L using YLD&rsquo;s actual structure. Use the interactive simulator on screen as the visual anchor &mdash; move the sliders as you teach each concept.</p>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Topic 1 &bull; 8 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Revenue Mechanics</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Start with the top line. Revenue = billable heads &times; billable days &times; day rate. Simple formula, but each variable hides complexity. Explain realised rate vs list rate (discounts, write-offs, fixed-price overruns). Explain revenue recognition &mdash; when does the work you did last month actually become revenue? Cover the sales-to-delivery lag: a deal signed today doesn&rsquo;t generate revenue for 4&ndash;6 weeks.</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>YLD anchor:</strong> Show the simulator with 70 heads at 86% utilisation and &pound;850 day rate. &ldquo;This is roughly where we are today.&rdquo;</p>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Topic 2 &bull; 8 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Cost Structure &amp; Margin</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Two types of cost: direct (COGS) and overheads. COGS = the people doing the work (salaries, contractor costs). Overheads = everything else (rent, sales, management, tools). Gross profit = revenue minus COGS. EBITDA = gross profit minus overheads. This is the number that tells you whether the business is actually making money.</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>YLD anchor:</strong> Move the cost-per-head slider. &ldquo;Watch what happens to EBITDA when average cost goes from &pound;55k to &pound;70k. That&rsquo;s the difference between hiring a mid-level and a senior engineer.&rdquo;</p>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Topic 3 &bull; 7 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Utilisation &amp; Leverage</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">These are the two margin drivers in a people business. Utilisation = % of available time that&rsquo;s billable. YLD runs at 86% vs a 76% sector average &mdash; that&rsquo;s exceptional but fragile. Every point of utilisation is worth roughly &pound;130k in revenue. Leverage = ratio of junior to senior staff on engagements. Higher leverage = higher margin (if quality holds).</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>YLD anchor:</strong> Drop utilisation from 86% to 76% on the simulator. &ldquo;That&rsquo;s what &lsquo;matching the industry average&rsquo; actually costs us.&rdquo;</p>
+    </div>
+
+    <div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Topic 4 &bull; 7 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Cash vs Profit</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">A profitable business can run out of cash. WIP (work done but not yet invoiced), debtors (invoiced but not yet paid), and DSO (days sales outstanding) explain the gap. If you deliver &pound;100k of work in January, invoice in February, and get paid in April &mdash; that&rsquo;s three months of carrying cost. For a growing business, this cash gap gets bigger, not smaller.</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>Question to the room:</strong> &ldquo;If YLD grew revenue 30% next year, would we need more or less cash? Why?&rdquo; (Answer: more &mdash; growth eats cash before it generates profit.)</p>
+    </div>
+
+    <div style="margin-top:1rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: Watch for glazed eyes during cost structure. If energy drops, pause and ask: &ldquo;Quick show of hands &mdash; who has ever approved a scope change without thinking about what it does to utilisation?&rdquo; Every hand should go up. That&rsquo;s your bridge back to relevance.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 3: APPLY -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">35 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The YLD P&amp;L Challenge</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Split into groups of 3&ndash;4. Each group gets the same starting P&amp;L (based on real YLD numbers) and must respond to three interconnected events that arrive in sequence.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--red);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Event 1</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">Your biggest client pauses their project. &pound;180k/quarter revenue disappears. Three contractors are now unbillable.</p>
+      </div>
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--gold);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Event 2</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">A contractor on another engagement has overrun by 3 weeks. The client won&rsquo;t pay for the extra time. That&rsquo;s &pound;45k of unrecoverable cost.</p>
+      </div>
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--mint-dark);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Event 3</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">A new prospect wants to start in 2 weeks. It&rsquo;s a &pound;300k engagement but you&rsquo;d need to hire 2 senior engineers. The deal hasn&rsquo;t signed yet.</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:0.75rem;" class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">How to run it</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Groups get 20 minutes to decide: What do you do about each event? What are the financial consequences of your decisions? Use the simulator to model your choices. Then each group presents their decisions in 3 minutes &mdash; followed by challenge from the room.</p>
+    </div>
+
+    <div style="margin-bottom:0.75rem;" class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">What good looks like</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Groups that ask: &ldquo;What does this do to EBITDA?&rdquo; before deciding. Groups that quantify trade-offs rather than just describing them. Groups that spot the cash vs profit distinction (hiring ahead of a deal that hasn&rsquo;t signed is a cash bet, not just a P&amp;L decision).</p>
+    </div>
+
+    <div style="margin-bottom:0;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: The exercise is designed to create disagreement within groups. Some will want to cut contractors immediately; others will want to hold them for the new prospect. Neither answer is wrong &mdash; the learning is in articulating the financial reasoning. If all groups agree, the exercise hasn&rsquo;t worked hard enough.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 4: REFLECT -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--navy);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">REFLECT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Facilitated Debrief</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.5rem;">Don&rsquo;t just review the answers. Focus the debrief on three questions:</p>
+    <div style="padding-left:0.5rem;border-left:2px solid var(--border-light);" class="facilitator-only">
+      <p style="font-size:0.85rem;color:var(--navy);margin:0 0 0.4rem;"><strong>1. What surprised you?</strong> <span style="font-weight:300;color:var(--text-secondary);">Most people are surprised by how quickly small decisions compound. A 3-week overrun feels manageable until you see it on the P&amp;L next to the paused project.</span></p>
+      <p style="font-size:0.85rem;color:var(--navy);margin:0 0 0.4rem;"><strong>2. Where did your group disagree?</strong> <span style="font-weight:300;color:var(--text-secondary);">The disagreements reveal different mental models. Some people optimise for revenue, some for margin, some for risk. Name the difference.</span></p>
+      <p style="font-size:0.85rem;color:var(--navy);margin:0;"><strong>3. What would you do differently on Monday?</strong> <span style="font-weight:300;color:var(--text-secondary);">Ground the learning in their actual role. &ldquo;What decision do you have coming up this month that now looks different?&rdquo;</span></p>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: Let silence sit after each question. Count to 7 before you speak. The best insights come after the obvious answers have been given.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 5: COMMIT -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.5rem;">Each person writes down one thing they will do differently in the next two weeks. Not &ldquo;learn more about finance&rdquo; &mdash; something specific and observable. Examples:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.75rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;Before approving my next scope change, I&rsquo;ll calculate the utilisation impact.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll ask the finance team to walk me through last month&rsquo;s actual P&amp;L.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll check the DSO on my two biggest clients and chase if overdue.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;Next time I propose hiring, I&rsquo;ll include a payback calculation.&rdquo;</div>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Share with the person sitting next to you. They&rsquo;re your accountability partner &mdash; they&rsquo;ll ask you about it at the start of the next session.</p>
+  </div>
+
+  <!-- BLOCK 6: RETURN TO PROVOCATION -->
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--navy);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">CLOSE</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Return to the Opening Scenario</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.5rem;">Re-read the opening scenario. Ask: &ldquo;Who can now talk through what they&rsquo;d do &mdash; with numbers?&rdquo; The difference between how the room responds now vs 90 minutes ago is the evidence that the session worked.</p>
+    <div style="background:var(--off-white);border-radius:8px;padding:1rem;margin-top:0.5rem;">
+      <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Close with the takeaway: <strong style="color:var(--navy);">&ldquo;Financial curiosity is more valuable than financial jargon. From today, always ask: how does this affect EBITDA or cash?&rdquo;</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- PREPARATION CHECKLIST -->
+<div style="margin-top:1.5rem;border:1px solid var(--border-light);border-radius:10px;padding:1.25rem;" class="facilitator-only">
+  <h5 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.6rem;">&#9745; Preparation Checklist</h5>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; P&amp;L simulator loaded and tested on screen</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Printed P&amp;L exercise packs (one per group)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Real YLD financial data anonymised for exercise</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Commitment cards or paper for each participant</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Timer visible for group exercise (20 min work + 3 min per group present)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Pre-assigned groups (mix functions, avoid obvious pairs)</p>
+  </div>
+</div>
+
+<!-- KEY METRICS REFERENCE -->
+<div style="margin-top:1rem;border:1px solid var(--border-light);border-radius:10px;padding:1.25rem;">
+  <h5 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.6rem;">Key Metrics Reference Card</h5>
+  <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);margin-bottom:0.5rem;">The numbers every YLD leader should know by the end of this session:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;">
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">UTILISATION</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">86%</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">vs 76% sector avg</div></div>
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">REVENUE CAGR</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">18%</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">FY23&ndash;FY25 forecast</div></div>
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">EBITDA CAGR</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">25%</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">FY23&ndash;FY25 forecast</div></div>
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">AVG CONTRACT</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">19 months</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">up 19% from FY22</div></div>
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">TOP 5 TENURE</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">30 months</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">avg engagement length</div></div>
+    <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;"><div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--purple);margin-bottom:0.15rem;">REV PER CLIENT</div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">&pound;128k/mo</div><div style="font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">up 139% from &pound;54k</div></div>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;Financial curiosity is more valuable than financial jargon. Always ask: how does this affect EBITDA or cash?&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="2"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">02</span><div class="theme-title-group"><div class="theme-title">Managing Client Relationships</div><div class="theme-subtitle">From delivery partner to trusted adviser</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Every leader sees themselves as a relationship manager and knows how to expand accounts, handle difficult conversations, and generate referrals.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I&rsquo;m a delivery lead. Sales is someone else&rsquo;s job.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Every conversation I have with a client is either building or eroding our future pipeline.&rdquo;</p>
+  </div>
+</div>
+
+<!-- SESSION STORYBOARD -->
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <!-- OPEN -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;Your biggest client&rsquo;s sponsor &mdash; the person who championed YLD internally, who fought for budget renewals, who referred you to two other companies &mdash; just emailed to say they&rsquo;re leaving. Their last day is Friday. You have no other senior relationship at that account. The contract renewal is in 6 weeks. What do you do in the next 48 hours?&rdquo;</p>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;" class="facilitator-only">Let the room feel the gap. Most people won&rsquo;t have a clear plan. That discomfort is the motivation for the session. Say: <em>&ldquo;If you can&rsquo;t answer that fluently, you have a single point of failure in your most important client relationship. Let&rsquo;s fix that.&rdquo;</em></p>
+  </div>
+
+  <!-- FRAME -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">25 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: From Delivery Partner to Trusted Adviser</h5>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;" class="facilitator-only">Topic 1 &bull; 8 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">The Relationship Spectrum</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Three levels: vendor (you do what you&rsquo;re told), delivery partner (you&rsquo;re trusted to deliver well), trusted adviser (you&rsquo;re asked for opinions on things outside your scope). Most YLD relationships sit at level 2. The revenue difference between 2 and 3 is enormous &mdash; trusted advisers get called first for new work.</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>Exercise:</strong> Ask each person to privately place their top 3 client relationships on the spectrum. Don&rsquo;t share yet &mdash; this becomes the baseline for the later exercise.</p>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;" class="facilitator-only">Topic 2 &bull; 8 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">The NewDay Playbook</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">NewDay grew from 6 engineers to 31. Average monthly revenue per customer grew 139% (&pound;54k to &pound;128k). Top 5 clients stay 30 months. This didn&rsquo;t happen by accident &mdash; it happened because delivery quality created trust, trust created conversation, and conversation created expansion.</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>YLD anchor:</strong> &ldquo;Every one of you is sitting on a version of this playbook. The question is whether you&rsquo;re running it deliberately or leaving it to chance.&rdquo;</p>
+    </div>
+
+    <div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;" class="facilitator-only">Topic 3 &bull; 9 min</div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Difficult Conversations &amp; Commercial Listening</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Scope creep, quality concerns, rate negotiations, contract renewals. These aren&rsquo;t problems to avoid &mdash; they&rsquo;re the moments where trust is either built or broken. Commercial listening means hearing what the client says but understanding the context behind it: budget cycles, internal politics, competing priorities.</p>
+    </div>
+
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: &ldquo;Sales is not a dirty word&rdquo; is a key reframe. If anyone pushes back (&ldquo;I&rsquo;m an engineer, not a salesperson&rdquo;), redirect: &ldquo;You&rsquo;re not selling. You&rsquo;re helping clients solve problems they haven&rsquo;t fully articulated yet. That&rsquo;s what trusted advisers do.&rdquo;</p>
+    </div>
+  </div>
+
+  <!-- APPLY -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">40 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Client Scenario Room</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Split into pairs. Each pair gets one scenario. One person plays the YLD lead, the other plays the client. Role-play for 8 minutes, then swap roles. Debrief in the full group.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--red);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Scenario A</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">The client is unhappy with a senior engineer&rsquo;s performance. They want them replaced. Your engineer doesn&rsquo;t know yet.</p>
+      </div>
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--gold);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Scenario B</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">The client wants to extend scope significantly but says there&rsquo;s no additional budget. They expect you to absorb it.</p>
+      </div>
+      <div style="background:var(--off-white);border-radius:8px;padding:1rem;border-left:3px solid var(--mint-dark);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--mint-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Scenario C</div>
+        <p style="font-size:0.8rem;font-weight:400;color:var(--navy);margin:0;">A former client contact has moved to a new company and reaches out. They loved working with YLD but their new company has never heard of you.</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:0;" class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">What good looks like</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Scenario A: The YLD lead doesn&rsquo;t immediately agree to replace. They ask what specifically isn&rsquo;t working, propose a recovery plan, and protect their engineer&rsquo;s dignity. Scenario B: They don&rsquo;t say no, but they don&rsquo;t say yes either &mdash; they reframe around priorities and trade-offs. Scenario C: They don&rsquo;t just catch up socially &mdash; they ask about the new company&rsquo;s challenges and plant seeds.</p>
+    </div>
+
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: The role-play will feel awkward at first. That&rsquo;s fine. After 2 minutes most people forget they&rsquo;re acting. The client-side player is crucial &mdash; brief them to be realistic, not easy. If someone playing the client is too compliant, the exercise loses its edge.</p>
+    </div>
+  </div>
+
+  <!-- REFLECT -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--navy);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">REFLECT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Facilitated Debrief</h5>
+    <div style="padding-left:0.5rem;border-left:2px solid var(--border-light);" class="facilitator-only">
+      <p style="font-size:0.85rem;color:var(--navy);margin:0 0 0.4rem;"><strong>1. What was harder &mdash; being YLD or being the client?</strong> <span style="font-weight:300;color:var(--text-secondary);">Usually people find playing the client more revealing. They suddenly see what it feels like to be managed rather than advised.</span></p>
+      <p style="font-size:0.85rem;color:var(--navy);margin:0 0 0.4rem;"><strong>2. Where did you default to &ldquo;fixing&rdquo; instead of listening?</strong> <span style="font-weight:300;color:var(--text-secondary);">Engineers especially jump to solutions. The skill is sitting in the client&rsquo;s frustration long enough to understand the real issue.</span></p>
+      <p style="font-size:0.85rem;color:var(--navy);margin:0;"><strong>3. Which of your real client relationships needs attention right now?</strong></p>
+    </div>
+  </div>
+
+  <!-- COMMIT -->
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.75rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll schedule a non-project catch-up with my top client contact this fortnight.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll map all relationships at my biggest account &mdash; not just my day-to-day contact.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<!-- PREPARATION CHECKLIST -->
+<div style="margin-top:1.5rem;border:1px solid var(--border-light);border-radius:10px;padding:1.25rem;" class="facilitator-only">
+  <h5 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.6rem;">&#9745; Preparation Checklist</h5>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Printed scenario briefs (one per pair, both sides)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Pre-assigned pairs (mix functions)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Timer visible for role-play (8 min per round)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Relationship spectrum handout for self-assessment</p>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;Your best sales team is already in the building. Everyone who delivers for a client is building &mdash; or eroding &mdash; YLD&rsquo;s future pipeline.&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="3"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">03</span><div class="theme-title-group"><div class="theme-title">Leading People</div><div class="theme-subtitle">From managing tasks to growing people</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Leaders shift from &ldquo;doing the work&rdquo; to creating the conditions for their teams to thrive &mdash; across London, Lisbon, and Porto.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I&rsquo;m the best engineer on my team. That&rsquo;s why I lead it.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;My job is to create the conditions for my team to do their best work &mdash; not to do it for them.&rdquo;</p>
+  </div>
+</div>
+
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <!-- OPEN -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;Your best engineer just resigned. They told HR they love the work but don&rsquo;t feel like they&rsquo;re growing. You had no idea. Their last 1:1 with you was three months ago. Your team in Porto heard the news before you did. What does this tell you about how you&rsquo;re leading?&rdquo;</p>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;" class="facilitator-only">This scenario will hit home for most people. Don&rsquo;t let them externalise (&ldquo;HR should have flagged it&rdquo;). The point is: if you didn&rsquo;t see it coming, the feedback loop isn&rsquo;t working.</p>
+  </div>
+
+  <!-- FRAME -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">25 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: The Leadership Shift</h5>
+
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">From &ldquo;I deliver&rdquo; to &ldquo;I create conditions&rdquo;</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Most YLD leaders were promoted because they were excellent practitioners. The trap is continuing to do the thing you were great at instead of doing the new thing: setting context, making space, growing people. Delegation is not abdication &mdash; it&rsquo;s giving ownership while staying close enough to support.</p>
+    </div>
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Feedback as a Habit, Not an Event</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">If someone only hears how they&rsquo;re doing twice a year, you&rsquo;ve lost 350 days of potential course correction. The goal is to make feedback so normal that it doesn&rsquo;t require courage to give or receive.</p>
+    </div>
+    <div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Remote &amp; Distributed Leadership</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">YLD operates across London, Lisbon, and Porto. Leading people you can&rsquo;t see requires deliberate over-communication, structured touchpoints, and trust that was earned before the distance.</p>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: This is the session where egos are most at risk. People who see themselves as strong leaders may resist the idea that they have gaps. Keep the tone curious, not critical. The Leadership Mirror exercise will do the heavy lifting.</p>
+    </div>
+  </div>
+
+  <!-- APPLY -->
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">40 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Leadership Mirror</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Each person self-assesses against five leadership dimensions (1&ndash;5 scale). Then they receive anonymous input from two peers in the room on the same dimensions.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;margin-bottom:1rem;">
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;text-align:center;"><div style="font-size:0.75rem;font-weight:600;color:var(--navy);">Context-Setting</div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;">Does your team know why, not just what?</div></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;text-align:center;"><div style="font-size:0.75rem;font-weight:600;color:var(--navy);">Delegation</div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;">Ownership given, not micromanaged?</div></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;text-align:center;"><div style="font-size:0.75rem;font-weight:600;color:var(--navy);">Feedback</div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;">Regular, honest, two-way?</div></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;text-align:center;"><div style="font-size:0.75rem;font-weight:600;color:var(--navy);">Decision-Making</div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;">Clear, timely, inclusive enough?</div></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;text-align:center;"><div style="font-size:0.75rem;font-weight:600;color:var(--navy);">Team Growth</div><div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;">Are people developing under you?</div></div>
+    </div>
+
+    <div class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">How to run it</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0 0 0.5rem;">Step 1 (5 min): Self-assess. Step 2 (10 min): Two peers score you anonymously on printed cards. Step 3 (5 min): Read your peer scores privately. Step 4 (20 min): Facilitated discussion &mdash; not &ldquo;who scored what&rdquo; but &ldquo;where was the biggest gap between how you see yourself and how others see you?&rdquo;</p>
+    </div>
+
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: The gap between self and peer perception is the entire point. Some people will score themselves low; their peers will score them higher. That&rsquo;s also insight. Protect anonymity fiercely &mdash; if anyone tries to identify who scored them, shut it down immediately.</p>
+    </div>
+  </div>
+
+  <!-- REFLECT & COMMIT -->
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.5rem;">Based on your mirror results, write one specific thing you&rsquo;ll change about how you lead in the next two weeks.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll have a 20-minute 1:1 with each direct report this fortnight and ask what&rsquo;s blocking them.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll delegate the next client demo entirely and only give feedback afterwards.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:1.5rem;border:1px solid var(--border-light);border-radius:10px;padding:1.25rem;" class="facilitator-only">
+  <h5 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.6rem;">&#9745; Preparation Checklist</h5>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Printed self-assessment forms (5 dimensions, 1&ndash;5 scale)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Anonymous peer scoring cards (pre-assigned pairs)</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Envelopes for anonymous collection and return</p>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin:0;">&#9744; Commitment cards for each participant</p>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;The strongest leaders don&rsquo;t carry the heaviest load. They build teams that share the load and step in for each other when the work is hard.&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="4"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">04</span><div class="theme-title-group"><div class="theme-title">Risk, Judgement &amp; Accountability</div><div class="theme-subtitle">Owning decisions with incomplete information</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Risk identification and escalation becomes a normal leadership habit, not something reserved for the CEO.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I&rsquo;ll flag it if it becomes a real problem.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I surface risks early with options, not just issues. That&rsquo;s leadership, not weakness.&rdquo;</p>
+  </div>
+</div>
+
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;A project has been drifting for three weeks. The client&rsquo;s stakeholder has gone quiet. Your lead engineer mentioned last month that the requirements were unclear but &lsquo;it&rsquo;ll be fine.&rsquo; You didn&rsquo;t follow up. Now the client has escalated directly to the CEO. How did we get here?&rdquo;</p>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;" class="facilitator-only">Every person in the room will recognise some version of this. The pattern is always the same: a small signal was ignored, nobody escalated, and by the time it surfaced it was a crisis. Say: <em>&ldquo;The question isn&rsquo;t why the project went wrong. It&rsquo;s why nobody said anything three weeks ago.&rdquo;</em></p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">20 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: Risk, Judgement &amp; Escalation</h5>
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">The 70% Rule</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Act when you have 70% of the information you&rsquo;d like. Waiting for 100% means you&rsquo;re always late. The skill is recognising when you have enough to decide and when you genuinely need more.</p>
+    </div>
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Escalation Without Abdication</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Raising a risk early is not passing the problem. Come with options, not just issues. &ldquo;I&rsquo;ve identified X. Here are three things we could do. I recommend Y because...&rdquo;</p>
+    </div>
+    <div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Three Types of Risk at YLD</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;"><strong>Client delivery risk:</strong> scope drift, stakeholder disengagement, team fatigue. <strong>Commercial risk:</strong> revenue concentration, contractor dependency, pricing pressure. <strong>People risk:</strong> attrition, single points of failure, knowledge silos.</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">35 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Pre-Mortem</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--red);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;It&rsquo;s January 2028. YLD has missed its growth targets badly. The business has stalled. Revenue is flat, key people have left, and two major clients didn&rsquo;t renew. What went wrong?&rdquo;</p>
+    </div>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">In groups, work backwards from this failure. Identify the decisions, the missed signals, and the risks that nobody owned. Then map each risk to a current owner and agree early warning indicators.</p>
+    <div class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">What good looks like</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Groups that go beyond the obvious (&ldquo;we lost a big client&rdquo;) to the structural (&ldquo;we had no succession plan for key relationships&rdquo; or &ldquo;we never resolved the tension between growth and quality&rdquo;). The best pre-mortems surface the things nobody is currently saying.</p>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: This is the most emotionally powerful exercise in the programme. Give it space. Don&rsquo;t rush the debrief. The risk map that comes out of this should be photographed and followed up &mdash; it&rsquo;s a genuine strategic artefact.</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll raise the project risk I&rsquo;ve been sitting on in this week&rsquo;s leadership meeting.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll adopt the &lsquo;options not issues&rsquo; format for every escalation I make.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;Asking for support is not a sign of weakness. It is an expected part of working as a strong leadership team.&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="5"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">05</span><div class="theme-title-group"><div class="theme-title">Trust at Scale</div><div class="theme-subtitle">Building and protecting trust as you grow</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">The team can diagnose trust gaps &mdash; internal and external &mdash; and design specific interventions to strengthen them.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Trust is a soft skill. We just need to deliver well.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Trust is measurable, and I can diagnose exactly where it&rsquo;s strong and where it&rsquo;s at risk.&rdquo;</p>
+  </div>
+</div>
+
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;Think of the last time a client renewed without you having to sell anything. That happened because of trust. Now think of the last time you hesitated before raising a problem with a colleague. That also happened because of trust &mdash; or the lack of it.&rdquo;</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">25 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: The Trust Equation</h5>
+
+    <div style="background:var(--off-white);border-radius:8px;padding:1.25rem;text-align:center;margin-bottom:1rem;">
+      <p style="font-size:1.1rem;font-weight:600;color:var(--navy);margin:0;">Trust = <span style="color:var(--purple);">Credibility + Reliability + Intimacy</span> &divide; <span style="color:var(--red);">Self-Orientation</span></p>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin:0.5rem 0 0;">(Maister, Green &amp; Galford)</p>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;">Walk through each element with YLD examples. <strong>Credibility:</strong> do clients believe you know what you&rsquo;re talking about? <strong>Reliability:</strong> do you do what you said you&rsquo;d do, every time? <strong>Intimacy:</strong> does the client feel safe sharing real problems with you? <strong>Self-orientation (the denominator):</strong> do you care more about their outcome or yours?</p>
+      <p style="font-size:0.78rem;font-weight:400;color:var(--purple);margin:0.4rem 0 0;" class="facilitator-only"><strong>YLD anchor:</strong> &ldquo;YLD&rsquo;s 30-month average client tenure exists because all four elements are working. But trust is fragile &mdash; one missed denominator spike can undo years of numerator building.&rdquo;</p>
+    </div>
+
+    <div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Internal Trust &amp; Psychological Safety</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Trust between leadership team members. Trust between London, Lisbon, and Porto. Trust between the team and the Board. If problems don&rsquo;t surface early internally, they surface late externally &mdash; with clients and in crises.</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">35 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Trust Mapping</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Each person maps the key trust relationships in their world &mdash; team, peers, clients, Board &mdash; and honestly assesses each on a 1&ndash;5 scale using the trust equation elements. Then identify the one relationship where trust is most at risk and design a specific intervention.</p>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;" class="facilitator-only"><strong>Important:</strong> Interventions are shared in pairs, not with the full group. Some of the most at-risk relationships will be internal, possibly with people in the room. Pairs provide safety. Full-group sharing would shut people down.</p>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: Watch for people who only map client relationships and avoid internal ones. Gently prompt: &ldquo;What about the relationships in this room? Where&rsquo;s trust strong between you and your peers, and where does it need work?&rdquo;</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll have the conversation I&rsquo;ve been avoiding with [peer] about how we work together.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll proactively share a mistake with my client this month instead of burying it.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;Trust scales through consistency, not heroics. How you behave when things go wrong tells people more than anything you do when things go right.&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="6"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">06</span><div class="theme-title-group"><div class="theme-title">Commercial Decision-Making</div><div class="theme-subtitle">Prioritisation, trade-offs, and sector expansion</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Leaders apply a consistent prioritisation framework and can take a new sector from blank page to qualified pipeline using AI tools.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;We should do more. We need to be everywhere.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;Fewer things, done better. And I have a framework to decide which things.&rdquo;</p>
+  </div>
+</div>
+
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;You have the capacity to pursue three new opportunities this quarter. There are seven on the table. Which four do you say no to &mdash; and how do you explain that to the people who brought them in?&rdquo;</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">20 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: The Prioritisation Framework</h5>
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Opportunity Cost</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Every &lsquo;yes&rsquo; is a &lsquo;no&rsquo; to something else. In a resource-constrained business, this is the most important concept. The cost of doing something isn&rsquo;t just the budget &mdash; it&rsquo;s what you couldn&rsquo;t do instead.</p>
+    </div>
+    <div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Four Lenses for Every Decision</h6>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.5rem;">
+        <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;font-size:0.78rem;"><strong style="color:var(--navy);">Impact</strong><br><span style="color:var(--text-muted);">How much does this move the needle?</span></div>
+        <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;font-size:0.78rem;"><strong style="color:var(--navy);">Effort</strong><br><span style="color:var(--text-muted);">What does it cost in time and people?</span></div>
+        <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;font-size:0.78rem;"><strong style="color:var(--navy);">Alignment</strong><br><span style="color:var(--text-muted);">Does it fit where YLD is heading?</span></div>
+        <div style="background:var(--off-white);border-radius:6px;padding:0.6rem;text-align:center;font-size:0.78rem;"><strong style="color:var(--navy);">Reversibility</strong><br><span style="color:var(--text-muted);">Can we undo it if we&rsquo;re wrong?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">45 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Sector Expansion Sprint + AI Accelerator</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Teams choose a new sector for YLD to explore. Using AI tools live in the session, they have 45 minutes to:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.75rem;">
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;border-left:3px solid var(--purple);"><strong style="font-size:0.8rem;color:var(--navy);">Research:</strong><span style="font-size:0.8rem;color:var(--text-secondary);"> Map pain points, key buyers, competitive landscape</span></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;border-left:3px solid var(--purple);"><strong style="font-size:0.8rem;color:var(--navy);">Draft:</strong><span style="font-size:0.8rem;color:var(--text-secondary);"> Create a front door statement for this sector</span></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;border-left:3px solid var(--purple);"><strong style="font-size:0.8rem;color:var(--navy);">Target:</strong><span style="font-size:0.8rem;color:var(--text-secondary);"> Identify 5 specific companies and an entry hypothesis</span></div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;border-left:3px solid var(--purple);"><strong style="font-size:0.8rem;color:var(--navy);">Build:</strong><span style="font-size:0.8rem;color:var(--text-secondary);"> Create a reusable prompt library for the team</span></div>
+    </div>
+    <div class="facilitator-only">
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Each team presents their sector thesis in 5 minutes. The room challenges: &ldquo;Would you bet &pound;100k of YLD&rsquo;s time on this?&rdquo; This forces rigour beyond the AI output.</p>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: Ensure laptops/phones are available for AI use. Have backup prompts ready in case teams get stuck. The output quality matters less than the process &mdash; the insight is that AI dramatically accelerates research but doesn&rsquo;t replace judgement.</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll apply the 4-lens framework to the next opportunity that lands on my desk before saying yes.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll use the prompt library to research one potential expansion area and bring findings to the team.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;Prioritisation is not about doing less. It&rsquo;s about doing fewer things better, and being honest about what you&rsquo;re choosing not to do.&rdquo;</p></div>
+
+</div></div></div>
+
+    <div class="theme-module" data-theme="7"><div class="theme-header" onclick="toggle(this)"><span class="theme-num">07</span><div class="theme-title-group"><div class="theme-title">Running the Business</div><div class="theme-subtitle">Not just your function</div></div><div class="theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="theme-body"><div class="theme-content">
+
+<h4>Outcome</h4>
+<p style="font-weight:500;color:var(--purple);font-size:0.9rem;">Every leader sees themselves as a leader of the business, not just their function &mdash; and can present decisions, not updates, to the Board.</p>
+
+<h4>The Shift We&rsquo;re Engineering</h4>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.75rem;align-items:center;margin:1rem 0 1.5rem;">
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking in</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I run my area well. That&rsquo;s my job.&rdquo;</p>
+  </div>
+  <div style="font-size:1.2rem;color:var(--purple);">&rarr;</div>
+  <div style="background:rgba(45,6,147,0.06);border-radius:8px;padding:1rem;text-align:center;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Walking out</div>
+    <p style="font-size:0.82rem;font-weight:400;color:var(--text-secondary);margin:0;">&ldquo;I&rsquo;m a leader of this business. I own outcomes beyond my function.&rdquo;</p>
+  </div>
+</div>
+
+<div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;margin:1.5rem 0;">
+  <div style="background:var(--navy);padding:0.75rem 1.25rem;">
+    <h4 style="color:white;margin:0;font-size:0.92rem;">Session Storyboard</h4>
+    <p style="color:var(--text-on-dark-muted);font-size:0.75rem;margin:0.2rem 0 0;font-weight:300;">90&ndash;120 minutes &bull; Frame &rarr; Apply &rarr; Reflect &rarr; Commit</p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">OPEN</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">10 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Provocation</h5>
+    <div style="background:var(--off-white);border-left:3px solid var(--purple);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin-bottom:0.75rem;">
+      <p style="font-size:0.85rem;font-style:italic;color:var(--navy);margin:0;line-height:1.7;">&ldquo;The Board asks each of you to present a 5-minute summary of YLD&rsquo;s biggest challenge right now &mdash; not in your area, in the whole business. You have 60 seconds to think. Go.&rdquo;</p>
+    </div>
+    <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;" class="facilitator-only">Cold-call 3&ndash;4 people. Most will default to their own function. That&rsquo;s the gap. Leaders of a business think about the whole, not just their piece. Say: <em>&ldquo;If you can only see the business through the lens of your function, you&rsquo;re not leading the business yet.&rdquo;</em></p>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--purple);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">FRAME</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">15 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Teaching: The Systems View</h5>
+    <div style="margin-bottom:1rem;">
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Engineering decisions affect commercial outcomes. Sales promises create delivery pressure. People decisions shape the cost base. Hiring choices affect client quality. Every function is connected. Leaders of a business see the ripples, not just the splash.</p>
+    </div>
+    <div style="margin-bottom:1rem;">
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">Board-Ready Thinking</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">A good board paper presents a decision, not an update. Structure: problem, context, options with trade-offs, recommendation, risks. If your paper ends with &ldquo;for discussion&rdquo; instead of &ldquo;we recommend X because...&rdquo;, you&rsquo;re not leading yet.</p>
+    </div>
+    <div>
+      <h6 style="font-weight:600;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">The Rhythm of the Business</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Weekly, monthly, quarterly cadences that create visibility and accountability without bureaucracy. The difference between an information-sharing meeting and a decision-making meeting. Which one are yours?</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;border-bottom:1px solid var(--border-light);">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--mint-dark);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">APPLY</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">45 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">The Board Pack Simulation</h5>
+    <p style="font-size:0.85rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:0.75rem;">Each group is given a real (anonymised) business challenge facing YLD. You have 30 minutes to prepare a one-page board paper: problem, options, recommendation, risks. Then present to the room &mdash; who play the role of the Board.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.75rem;" class="facilitator-only">
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem;">Example Challenge A</div>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0;">YLD&rsquo;s top 3 clients represent 55% of revenue. One is showing signs of reducing spend. What do you recommend?</p>
+      </div>
+      <div style="background:var(--off-white);border-radius:8px;padding:0.75rem;">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem;">Example Challenge B</div>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0;">Three senior engineers are being recruited by competitors. Matching salaries would increase cost base by &pound;180k. What do you recommend?</p>
+      </div>
+    </div>
+
+    <div class="facilitator-only">
+      <h6 style="font-weight:600;font-size:0.82rem;color:var(--navy);margin-bottom:0.3rem;">What good looks like</h6>
+      <p style="font-size:0.82rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin:0;">Papers that present a clear recommendation with financial reasoning, not just a description of the problem. Presentations that invite challenge rather than defending a position. Teams that disagree internally and resolve it before presenting.</p>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(231,51,60,0.05);border-radius:6px;padding:0.6rem 0.85rem;" class="facilitator-only">
+      <p style="font-size:0.75rem;font-weight:500;color:var(--red);margin:0;">&#9888; Facilitation note: When playing the Board, be constructively tough. Ask &ldquo;What&rsquo;s the cost of doing nothing?&rdquo; and &ldquo;How does this affect EBITDA?&rdquo; (connecting back to Theme 1). This exercise is the capstone &mdash; it should feel like a real board meeting.</p>
+    </div>
+  </div>
+
+  <div style="padding:1.25rem;">
+    <div style="display:flex;align-items:baseline;gap:0.6rem;margin-bottom:0.5rem;">
+      <span style="font-family:var(--font-mono);font-size:0.6rem;color:white;background:var(--gold);padding:0.15rem 0.5rem;border-radius:4px;letter-spacing:0.06em;">COMMIT</span>
+      <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);" class="facilitator-only">5 min</span>
+    </div>
+    <h5 style="font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.4rem;">Personal Commitment</h5>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;I&rsquo;ll attend one meeting outside my function this month and contribute.&rdquo;</div>
+      <div style="background:var(--off-white);border-radius:6px;padding:0.6rem 0.85rem;font-size:0.8rem;color:var(--text-secondary);font-style:italic;">&ldquo;Next time I present upwards, I&rsquo;ll use the decision-not-update format.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<div class="theme-takeaway" style="margin-top:1.25rem;"><p>&ldquo;You are not just the head of your function. You are a leader of this business. Act accordingly.&rdquo;</p></div>
+
+</div></div></div>
+
+  </div>
+</section>
+
+<section class="section-alt" id="simulator">
+  <div class="section-inner">
+    <div class="reveal"><div class="section-label">03 &mdash; Interactive</div><h2 class="section-title">The Consulting P&amp;L Simulator</h2><p class="section-lead">Adjust the levers and watch the financial outcomes change in real time. This is the tool we&rsquo;ll use in the Finance 101 session.</p></div>
+    <div class="simulator reveal">
+      <h3>How your decisions affect the bottom line</h3>
+      <p class="sim-desc">Move the sliders to see how utilisation, rate, headcount, and overheads flow through to EBITDA.</p>
+      <div class="sim-grid">
+        <div class="sim-controls">
+          <div class="sim-control"><label>Billable Headcount <span class="val" id="v-h">60</span></label><input type="range" id="s-h" min="40" max="100" value="60" oninput="calc()"></div>
+          <div class="sim-control"><label>Utilisation Rate <span class="val" id="v-u">86%</span></label><input type="range" id="s-u" min="50" max="100" value="86" oninput="calc()"></div>
+          <div class="sim-control"><label>Avg Day Rate (&pound;) <span class="val" id="v-r">&pound;850</span></label><input type="range" id="s-r" min="500" max="1500" value="850" step="25" oninput="calc()"><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--purple);text-align:right;margin-top:0.15rem;" id="v-r-pct"></div></div>
+          <div class="sim-control"><label>Avg Cost per Head (&pound;k/yr) <span class="val" id="v-c">&pound;55k</span></label><input type="range" id="s-c" min="35" max="85" value="55" oninput="calc()"><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--purple);text-align:right;margin-top:0.15rem;" id="v-c-pct"></div></div>
+          <div class="sim-control"><label>Overheads (&pound;k/yr) <span class="val" id="v-o">&pound;2,800k</span></label><input type="range" id="s-o" min="1500" max="5000" value="2800" step="100" oninput="calc()"><div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--purple);text-align:right;margin-top:0.15rem;" id="v-o-pct"></div></div>
+        </div>
+        <div class="sim-output">
+          <h4>P&amp;L Output</h4>
+          <div class="sim-metric"><span class="sim-metric-label">Revenue</span><span class="sim-metric-value pos" id="o-rev">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Direct Costs</span><span class="sim-metric-value neg" id="o-cogs">&mdash;</span></div>
+          <div class="sim-div"></div>
+          <div class="sim-metric"><span class="sim-metric-label">Gross Profit</span><span class="sim-metric-value pos" id="o-gp">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Gross Margin</span><span class="sim-metric-value" id="o-gm">&mdash;</span></div>
+          <div class="sim-div"></div>
+          <div class="sim-metric"><span class="sim-metric-label">Overheads</span><span class="sim-metric-value neg" id="o-oh">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">Overheads % Revenue</span><span class="sim-metric-value" id="o-ohm">&mdash;</span></div>
+          <div class="sim-div"></div>
+          <div class="sim-metric"><span class="sim-metric-label">EBITDA</span><span class="sim-metric-value big" id="o-ebitda">&mdash;</span></div>
+          <div class="sim-metric"><span class="sim-metric-label">EBITDA Margin</span><span class="sim-metric-value" id="o-em">&mdash;</span></div>
+          <div class="sim-div"></div>
+          <div class="sim-metric"><span class="sim-metric-label">Revenue per Head</span><span class="sim-metric-value" id="o-rph">&mdash;</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" id="ai">
+  <div class="section-inner">
+    <div class="reveal"><div class="section-label">04 &mdash; Harnessing AI</div><h2 class="section-title">AI as a Working Tool, Not a Talking Point</h2><p class="section-lead">We won&rsquo;t talk about AI in the abstract. We&rsquo;ll use it &mdash; live, in the session &mdash; across three themes that matter to YLD&rsquo;s growth. Every participant will leave with practical skills and a prompt library they can use immediately.</p></div>
+    <div class="ai-cards reveal">
+      <div class="ai-card"><div class="ai-icon">&#9889;</div><h3>Optimise What We Do</h3><p>Use AI to sharpen sector research, validate market hypotheses, and identify opportunities faster. Turn a week of desk research into 30 minutes of focused prompting.</p><ul style="margin-top:0.75rem;padding-left:1rem;"><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Sector mapping and competitor analysis</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Identifying digital transformation pain points by vertical</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Building a qualified target list with entry-point hypotheses</li></ul></div>
+      <div class="ai-card"><div class="ai-icon">&#128295;</div><h3>Be More Efficient</h3><p>AI for drafting proposals, synthesising feedback, preparing board papers, and creating first-cut messaging. Accelerating the path from thinking to output.</p><ul style="margin-top:0.75rem;padding-left:1rem;"><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Proposal and SOW drafting from brief notes</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Summarising meeting notes into actions and decisions</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Building templates for recurring communications</li></ul></div>
+      <div class="ai-card"><div class="ai-icon">&#128640;</div><h3>Evolve the Client Offer</h3><p>Position YLD as AI-literate. Understand how clients&rsquo; needs are shifting, where AI creates new service lines, and how to have credible conversations about AI-enabled transformation.</p><ul style="margin-top:0.75rem;padding-left:1rem;"><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">How client buying patterns are changing</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Where AI creates new service lines for YLD</li><li style="font-size:0.82rem;color:var(--text-on-dark-muted);margin-bottom:0.3rem;">Framing YLD&rsquo;s AI capability in client conversations</li></ul></div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:1.75rem;border:1px solid rgba(255,255,255,0.06);margin:2rem 0;" class="reveal">
+      <h3 style="font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:0.5rem;">What We&rsquo;ll Actually Do in the Session</h3>
+      <p style="font-size:0.88rem;font-weight:300;color:var(--text-on-dark-muted);line-height:1.7;margin-bottom:1rem;">This isn&rsquo;t a demonstration. Everyone works hands-on with AI tools in real time.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Exercise 1</div>
+          <h4 style="font-weight:700;font-size:0.92rem;color:var(--white);margin-bottom:0.3rem;">Sector Expansion Sprint</h4>
+          <p style="font-size:0.82rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;line-height:1.6;">Teams choose a new sector. Using AI live, they research pain points, draft outreach messaging, identify 5 target companies, and build an entry-point hypothesis &mdash; all in 45 minutes.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Exercise 2</div>
+          <h4 style="font-weight:700;font-size:0.92rem;color:var(--white);margin-bottom:0.3rem;">The Efficiency Challenge</h4>
+          <p style="font-size:0.82rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;line-height:1.6;">Each person brings a real task that takes them too long &mdash; writing proposals, summarising feedback, preparing updates. We work through it live with AI and build a reusable prompt.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Exercise 3</div>
+          <h4 style="font-weight:700;font-size:0.92rem;color:var(--white);margin-bottom:0.3rem;">Client Conversation Role-Play</h4>
+          <p style="font-size:0.82rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;line-height:1.6;">Practice the conversation: &ldquo;A client asks how YLD uses AI.&rdquo; Prepare a credible, specific answer using AI to research the client&rsquo;s sector and tailor the response in real time.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;">Output</div>
+          <h4 style="font-weight:700;font-size:0.92rem;color:var(--white);margin-bottom:0.3rem;">Personal Prompt Library</h4>
+          <p style="font-size:0.82rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;line-height:1.6;">Every participant leaves with a curated set of tested, YLD-specific prompts they can use in their daily work from the next day onwards.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-demo reveal">
+      <div class="prompt-bar"><span class="d1"></span><span class="d2"></span><span class="d3"></span><span>Live session prompt &mdash; sector expansion</span></div>
+      <div class="prompt-content">
+        <p><span class="pl">Prompt &rarr; </span><span class="pt">I&rsquo;m a digital consultancy (engineering + design) exploring the UK insurance sector. What are the top 5 digital transformation pain points for mid-market insurers right now? For each, explain what a consultancy like mine would typically be brought in to solve, and what the entry point conversation looks like.</span></p><br>
+        <p><span class="pl">Response &rarr; </span><span class="pr">Analysing sector dynamics, regulatory context, and typical buying patterns...</span><span class="cursor"></span></p>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:0.88rem;font-weight:300;color:var(--text-on-dark-muted);max-width:600px;line-height:1.7;margin-top:1.5rem;">In the session, we&rsquo;ll run prompts like this live, iterate together, and build a prompt library the team can use immediately. The point isn&rsquo;t to demonstrate AI &mdash; it&rsquo;s to make it a daily tool.</p>
+  </div>
+</section>
+
+<section class="section" id="frontdoor">
+  <div class="reveal"><div class="section-label">05 &mdash; The Front Door</div><h2 class="section-title">One Sentence That Opens Doors</h2><p class="section-lead">We&rsquo;ll build a front door statement together &mdash; one sentence that gets YLD into the right conversations quickly. Not a strategy rewrite. A practical tool everyone can use.</p></div>
+  <div class="fd-flow reveal">
+    <div class="fd-step"><span class="fd-num">01</span><div><h4>The Situation</h4><p>In plain English &mdash; what situation are clients typically in when they call YLD?</p></div></div>
+    <div class="fd-step"><span class="fd-num">02</span><div><h4>The 10-Second Test</h4><p>What do we want someone to assume about YLD after just 10 seconds?</p></div></div>
+    <div class="fd-step"><span class="fd-num">03</span><div><h4>The Genuine Edge</h4><p>What is YLD&rsquo;s real differentiator &mdash; not what we wish it was, but what clients actually value?</p></div></div>
+    <div class="fd-step"><span class="fd-num">04</span><div><h4>The Mistaken Identity</h4><p>What do we get mistaken for today? What does that do to win rates and pricing?</p></div></div>
+    <div class="fd-step"><span class="fd-num">05</span><div><h4>Three Proof Points</h4><p>Which three facts &mdash; with numbers &mdash; do we always lead with?</p></div></div>
+  </div>
+  <div class="fd-output reveal">
+    <div class="fd-label">What we&rsquo;ll produce</div>
+    <p>&rarr; One sentence that gets YLD into the right conversations</p>
+    <p>&rarr; A 30-second version for when you have more time</p>
+    <p>&rarr; Three proof points with numbers</p>
+  </div>
+</section>
+
+<section class="section-alt" id="agenda">
+  <div class="section-inner">
+    <div class="reveal"><div class="section-label">06 &mdash; Delivery Options</div><h2 class="section-title">Two Ways to Run This</h2><p class="section-lead">The programme can be delivered in two formats. Both are live, facilitated sessions &mdash; not self-study. The choice depends on what works best for YLD&rsquo;s rhythm and availability.</p></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;" class="reveal">
+
+    <div style="background:white;border-radius:12px;border:1px solid var(--border-light);overflow:hidden;">
+      <div style="background:var(--navy);padding:1.5rem 1.75rem;">
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">Option A</div>
+        <h3 style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:0.3rem;">Two-Day Leadership Offsite</h3>
+        <p style="font-size:0.85rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;">Immersive. Full team. Away from delivery.</p>
+      </div>
+      <div style="padding:1.5rem 1.75rem;">
+        <p style="font-size:0.88rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:1rem;">Two consecutive days offsite with the full leadership team. Evening of Day 1 is a team dinner &mdash; deliberately unstructured.</p>
+        <div style="margin-bottom:1rem;">
+          <h4 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.5rem;">Day 1: Commercial Foundations &amp; Client Mastery</h4>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.8;">
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">09:00</span> &nbsp; Opening: The Context</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">09:30</span> &nbsp; Finance 101 + P&amp;L Challenge</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">11:15</span> &nbsp; Client Relationships + Scenario Room</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">14:30</span> &nbsp; The Front Door Exercise</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">16:00</span> &nbsp; AI Accelerator: Sector Expansion Sprint</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">17:00</span> &nbsp; Day 1 Reflections</div>
+            <div style="opacity:0.5;font-style:italic;"><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">19:00</span> &nbsp; Team Dinner</div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.5rem;">Day 2: Leadership, Trust &amp; Operating as One Team</h4>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.8;">
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">09:00</span> &nbsp; Leading People + Leadership Mirror</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">11:00</span> &nbsp; Risk, Judgement &amp; Accountability + Pre-Mortem</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">13:30</span> &nbsp; AI: Efficiency Challenge + Client Conversations</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">15:00</span> &nbsp; Running the Business + Board Pack Simulation</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">16:30</span> &nbsp; Trust, Commitments &amp; What&rsquo;s Next</div>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem;background:var(--off-white);border-radius:8px;padding:1rem;">
+          <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin:0;"><strong>Best for:</strong> <span style="font-weight:300;color:var(--text-secondary);">Creating momentum fast. Builds team cohesion. High energy. Works well when the team needs a shared reset moment.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white;border-radius:12px;border:1px solid var(--border-light);overflow:hidden;">
+      <div style="background:var(--navy);padding:1.5rem 1.75rem;">
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--mint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">Option B</div>
+        <h3 style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:0.3rem;">Modular Series + Away Day</h3>
+        <p style="font-size:0.85rem;font-weight:300;color:var(--text-on-dark-muted);margin:0;">Weekly or fortnightly. Builds habits over time.</p>
+      </div>
+      <div style="padding:1.5rem 1.75rem;">
+        <p style="font-size:0.88rem;font-weight:300;color:var(--text-secondary);line-height:1.7;margin-bottom:1rem;">Seven live sessions (90&ndash;120 minutes each), delivered weekly or fortnightly, culminating in a full leadership team away day that pulls everything together.</p>
+        <div style="margin-bottom:1rem;">
+          <h4 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.5rem;">The Modules</h4>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.8;">
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 1</span> &nbsp; Finance 101 + P&amp;L Challenge</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 2</span> &nbsp; Managing Client Relationships + Scenario Room</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 3</span> &nbsp; Leading People + Leadership Mirror</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 4</span> &nbsp; Risk, Judgement &amp; Accountability + Pre-Mortem</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 5</span> &nbsp; Trust at Scale + Trust Mapping</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 6</span> &nbsp; Commercial Decision-Making + AI Accelerator</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Wk 7</span> &nbsp; Running the Business + Board Pack Simulation</div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-weight:700;font-size:0.88rem;color:var(--navy);margin-bottom:0.5rem;">Culminating Away Day</h4>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.8;">
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">AM</span> &nbsp;&nbsp;&nbsp; The Front Door Exercise + AI deep-dive</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">PM</span> &nbsp;&nbsp;&nbsp; Integration: Operating as One Team</div>
+            <div><span style="font-family:var(--font-mono);color:var(--purple);font-size:0.72rem;font-weight:500;">Close</span> &nbsp; Commitments &amp; What&rsquo;s Next</div>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem;background:var(--off-white);border-radius:8px;padding:1rem;">
+          <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin:0;"><strong>Best for:</strong> <span style="font-weight:300;color:var(--text-secondary);">Embedding learning into daily practice. Each module has time to land before the next. Between-session actions create accountability. The away day becomes a celebration of progress.</span></p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="section-inner" style="text-align:center;max-width:660px;">
+    <div class="reveal">
+      <div class="section-label" style="text-align:center;">A Final Thought</div>
+      <h2 class="section-title" style="text-align:center;">This Is Not a Training Programme</h2>
+      <p class="closing-text">It is an investment in the leadership team that will carry YLD through its most important chapter. The strongest version of this business is one where every leader understands the commercial reality, manages relationships with confidence, grows their people, and operates as one team.</p>
+      <p style="font-size:0.92rem;font-weight:400;color:var(--text-on-dark-muted);margin-top:1.5rem;">That&rsquo;s what we&rsquo;re building here.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArAAAAKwCAYAAABgREy2AAAY70lEQVR4nO3d227kWnJF0dRB/f8vqx+qVSWVUlJeyNixYo8BGDAM2J3iJTgZTZ9+eX19vQAAQIr/Vv8AAAC4h4AFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIIqABQAgioAFACCKgAUAIMqv1T8AoNDr6h8Q7mX1D4Ag5s3jfpw1NrAA3Or14qEMt3CfnEzAArvwQAEYQsACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQRcACABBFwAIAEEXAAgAQ5dfqHwDvvH7xP38p/RUAQGsClkpfBeqz/3sCFwA2ImA506PBesS/jqgFgKEELEeritafvP0OIQsAwwhYjtAlWq95/9vELAAMIGB5VOdo/YqYBYABBCz3SgzXa8QsAIQSsNxqSrhe43tZAAjiP8iAn7xeZsfre7v8nQAQzQaWr+wac7axANCcDSzX7Bqv7+20eQaAKAKW90TbZ44HADQjYHkj1L7m2ABAIwKWy0Wg3cJ2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" alt="YLD">
+  <p>YLD Leadership Programme &middot; 2026 &middot; Confidential</p>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50);const links=document.querySelectorAll('.nav-links a');let cur='';document.querySelectorAll('[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur))});
+
+function toggleView(){const b=document.body,t=document.getElementById('view-track'),l=document.getElementById('view-label');if(b.classList.contains('session-mode')){b.classList.remove('session-mode');t.classList.remove('session');l.textContent='Facilitator'}else{b.classList.add('session-mode');t.classList.add('session');l.textContent='Session'}}
+
+function toggle(h){const m=h.parentElement,a=m.classList.contains('active');document.querySelectorAll('.theme-module').forEach(x=>x.classList.remove('active'));if(!a)m.classList.add('active')}
+
+function calc(){const h=+document.getElementById('s-h').value,u=+document.getElementById('s-u').value,r=+document.getElementById('s-r').value,c=+document.getElementById('s-c').value,o=+document.getElementById('s-o').value;document.getElementById('v-h').textContent=h;document.getElementById('v-u').textContent=u+'%';document.getElementById('v-r').textContent='\u00A3'+r;document.getElementById('v-c').textContent='\u00A3'+c+'k';document.getElementById('v-o').textContent='\u00A3'+o.toLocaleString()+'k';const pf=(v,b)=>{const p=((v-b)/b*100).toFixed(0);return p>0?'+'+p+'% vs baseline':p<0?p+'% vs baseline':'baseline'};document.getElementById('v-r-pct').textContent=pf(r,850);document.getElementById('v-c-pct').textContent=pf(c,55);document.getElementById('v-o-pct').textContent=pf(o,2800);const bd=220*(u/100),rev=h*bd*r,cogs=h*c*1000,gp=rev-cogs,gm=(gp/rev)*100,ebitda=gp-(o*1000),em=(ebitda/rev)*100,rph=rev/h;const f=n=>'\u00A3'+(Math.abs(n)/1e6).toFixed(1)+'m',fk=n=>'\u00A3'+Math.round(n/1000).toLocaleString()+'k';document.getElementById('o-rev').textContent=f(rev);document.getElementById('o-cogs').textContent=f(cogs);document.getElementById('o-gp').textContent=f(gp);document.getElementById('o-gm').textContent=gm.toFixed(1)+'%';document.getElementById('o-oh').textContent=f(o*1000);document.getElementById('o-ohm').textContent=((o*1000/rev)*100).toFixed(1)+'%';document.getElementById('o-ebitda').textContent=f(ebitda);document.getElementById('o-ebitda').className='sim-metric-value big'+(ebitda<0?' neg':'');document.getElementById('o-em').textContent=em.toFixed(1)+'%';document.getElementById('o-em').className='sim-metric-value'+(em<0?' neg':' pos');document.getElementById('o-rph').textContent=fk(rph)}
+calc();
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const mobs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.querySelectorAll('.metric-value').forEach(el=>{const t=+el.dataset.target,suf=el.dataset.suffix||'',pre=el.dataset.prefix||'',sep=el.dataset.sep==='1';let cur=0;const step=t/40,timer=setInterval(()=>{cur+=step;if(cur>=t){cur=t;clearInterval(timer)}const v=Math.round(cur);el.textContent=pre+(sep?v.toLocaleString():v)+suf},30)});mobs.unobserve(x.target)}})},{threshold:0.3});document.querySelectorAll('.metrics-row').forEach(el=>mobs.observe(el));
+</script>
+</body>
+</html>
